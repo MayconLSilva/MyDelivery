@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/action_search_consulta_cliente"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="consultar"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView"/>
+
+    <item
+        android:id="@+id/newCliente"
+        android:icon="@drawable/tela_cliente_iconnovousuario"
+        app:showAsAction="ifRoom"
+        android:title="Novo Cliente"/>
+</menu>

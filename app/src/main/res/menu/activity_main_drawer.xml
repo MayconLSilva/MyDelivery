@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cliente"
+            android:icon="@drawable/tela_dashboard_iconcliente"
+            android:title="@string/telaDashboard_cliente" />
+        <item
+            android:id="@+id/nav_vendas"
+            android:icon="@drawable/tela_dashboard_iconvendas"
+            android:title="@string/telaDashboard_Venda" />
+        <item
+            android:id="@+id/nav_entrega"
+            android:icon="@drawable/tela_dashboard_iconentrega"
+            android:title="@string/telaDashboard_Entrega" />
+    </group>
+</menu>
