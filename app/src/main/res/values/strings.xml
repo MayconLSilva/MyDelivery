@@ -14,4 +14,13 @@
     <string name="telaDashboard_cliente">Clientes</string>
     <string name="telaDashboard_Entrega">Entregas</string>
     <string name="telaDashboard_Venda">Vendas</string>
+    <string name="dialogCliente_nomecliente">Nome</string>
+    <string name="dialogCliente_cpfcliente">CPF/CNPJ</string>
+    <string name="dialogCliente_Endereco">Endereço</string>
+    <string name="dialogCliente_NumeroEndereco">Nº</string>
+    <string name="dialogCliente_Bairro">Bairro</string>
+    <string name="dialogCliente_Cidade">Cidade</string>
+    <string name="dialogCliente_Email">E-mail</string>
+    <string name="dialogCliente_Telefone">Telefone</string>
+    <string name="dialogCliente_Celular">Celular</string>
 </resources>
