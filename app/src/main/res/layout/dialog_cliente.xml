@@ -1,116 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#C1BEBE"
     android:padding="5dp">
 
-        <LinearLayout
-            android:id="@+id/settings_holder"
+    <LinearLayout
+        android:id="@+id/settings_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- NOME CLIENTE -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
 
-                <!-- NOME CLIENTE -->
-                <EditText
-                    android:id="@+id/LayoutNomeCliente"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/dialogcliente_iconcliente"
-                    android:hint="@string/dialogCliente_nomecliente" />
+            <EditText
+                android:id="@+id/LayoutNomeCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/dialogcliente_iconcliente"
+                android:hint="@string/dialogCliente_nomecliente" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- CPF CLIENTE -->
-                <EditText
-                    android:id="@+id/LayoutCPFCliente"
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/dialogcliente_iconcpf"
-                    android:hint="@string/dialogCliente_cpfcliente"
-                    android:inputType="number" />
+        <!-- CPF/CNPJ CLIENTE -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
 
-                <!-- ENDEREÇO CLIENTE -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                                <EditText
-                                    android:id="@+id/LayoutEnderecoCliente"
-                                    android:layout_width="240dp"
-                                    android:layout_height="wrap_content"
-                                    android:drawableLeft="@drawable/dialogcliente_iconendereco"
-                                    android:hint="@string/dialogCliente_Endereco" />
+            <EditText
+                android:id="@+id/LayoutCPFCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/dialogcliente_iconcpf"
+                android:hint="@string/dialogCliente_cpfcliente"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                                <EditText
-                                    android:id="@+id/LayoutNumeroEnderecoCliente"
-                                    android:layout_width="70dp"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/dialogCliente_NumeroEndereco" />
-                </RelativeLayout>
-
-                <!-- BAIRRO UF CLIENTE -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                                <EditText
-                                    android:id="@+id/LayoutBairroCliente"
-                                    android:layout_width="235dp"
-                                    android:layout_height="wrap_content"
-                                    android:drawableLeft="@drawable/dialogcliente_iconendereco"
-                                    android:hint="@string/dialogCliente_Bairro" />
-                                <Spinner
-                                    android:id="@+id/LayoutUFCliente"
-                                    android:layout_width="90dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="15dp"/>
-                </RelativeLayout>
-
-                <!-- CIDADE CLIENTE -->
-
-                        <EditText
-                            android:id="@+id/LayoutCidadeCliente"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:drawableLeft="@drawable/dialogcliente_iconendereco"
-                            android:editable="false"
-                            android:hint="@string/dialogCliente_Cidade" />
-
-
-                <!-- E-MAIL CLIENTE -->
-
-                        <EditText
-                            android:id="@+id/LayoutEmailCliente"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:drawableLeft="@drawable/dialogcliente_iconemail"
-                            android:hint="@string/dialogCliente_Email" />
-
-
-                <!-- TELEFONE CLIENTE -->
-
-                        <EditText
-                            android:id="@+id/LayoutTelefoneCliente"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:drawableLeft="@drawable/dialogcliente_iconphone"
-                            android:hint="@string/dialogCliente_Telefone"
-                            android:inputType="number" />
-
-
-                <!-- CELULAR CLIENTE -->
-
-                        <EditText
-                            android:id="@+id/LayoutCelularCliente"
-                            android:layout_width="180dp"
-                            android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/dialogcliente_iconcellphone"
-                            android:hint="@string/dialogCliente_Celular"
-                            android:inputType="number" />
-
-
-        </LinearLayout>
+    </LinearLayout>
 </ScrollView>
