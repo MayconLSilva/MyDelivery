@@ -20,11 +20,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
                 "(id_Cliente INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " nome_Cliente TEXT," +
                 " cpf_Cliente TEXT UNIQUE," +
-                " endereco_Cliente TEXT," +
-                " numeroEndereco_Cliente TEXT," +
-                " bairro_Cliente TEXT," +
-                " uf_Cliente TEXT," +
-                " cidade_Cliente TEXT," +
+                " rg_Cliente TEXT," +
                 " telefone_Cliente TEXT," +
                 " celular_Cliente TEXT UNIQUE," +
                 " email_Cliente TEXT,"  +

@@ -5,6 +5,7 @@ public class ClienteModelo {
     private int IdCli;
     private String nomeCli;
     private String cpfCli;
+    private String rgCli;
     private String enderecoCli;
     private String numeroEnderecoCli;
     private String bairroCli;
@@ -120,5 +121,13 @@ public class ClienteModelo {
 
     public void setDataAlteracaoCli(String dataAlteracaoCli) {
         this.dataAlteracaoCli = dataAlteracaoCli;
+    }
+
+    public String getRgCli() {
+        return rgCli;
+    }
+
+    public void setRgCli(String rgCli) {
+        this.rgCli = rgCli;
     }
 }

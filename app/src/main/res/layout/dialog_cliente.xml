@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#C1BEBE"
+
+
     android:padding="5dp">
 
     <LinearLayout
@@ -22,7 +23,7 @@
             app:boxStrokeColor="#919191">
 
             <EditText
-                android:id="@+id/LayoutNomeCliente"
+                android:id="@+id/txtNomeCliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -39,7 +40,7 @@
             app:boxStrokeColor="#919191">
 
             <EditText
-                android:id="@+id/LayoutCPFCliente"
+                android:id="@+id/txtCPF_CNPJCliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -47,6 +48,96 @@
                 android:hint="@string/dialogCliente_cpfcliente"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- RG/I.E Cliente -->
+       <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+           <EditText
+               android:id="@+id/txtRG_IECliente"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:drawableRight="@drawable/dialogcliente_iconcpf"
+               android:hint="@string/dialogCliente_rgIEcliente"
+               android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- E-MAIL -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+            <EditText
+                android:id="@+id/txtEmailCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/dialogcliente_iconemail"
+                android:hint="@string/dialogCliente_Email"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- TELEFONE -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+            <EditText
+                android:id="@+id/txtTelefoneCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/dialogcliente_iconphone"
+                android:hint="@string/dialogCliente_Telefone"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- CELULAR -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+            <EditText
+                android:id="@+id/txtCelularCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/dialogcliente_iconcellphone"
+                android:hint="@string/dialogCliente_Celular"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <Button
+                android:id="@+id/btnSalvar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#4CAF50"
+                android:text="@string/dialogCliente_BtnSalvar" />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="#F60707"
+                android:text="@string/dialogCliente_BtnCancelar" />
+        </TableRow>
 
     </LinearLayout>
 </ScrollView>

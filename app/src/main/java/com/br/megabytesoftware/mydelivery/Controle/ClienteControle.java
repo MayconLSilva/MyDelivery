@@ -22,19 +22,14 @@ public class ClienteControle extends DataBaseAdapter {
     public boolean salvarCliente (ClienteModelo modeloCliente){
 
         ContentValues values = new ContentValues();
+        values.put("nome_Cliente",modeloCliente.getNomeCli());
         values.put("cpf_Cliente", modeloCliente.getCpfCli());
-        values.put("nome_Cliente", modeloCliente.getNomeCli());
-        values.put("endereco_Cliente", modeloCliente.getEnderecoCli());
-        values.put("numeroEndereco_Cliente", modeloCliente.getNumeroEnderecoCli());
-        values.put("bairro_Cliente", modeloCliente.getBairroCli());
-        values.put("uf_Cliente", modeloCliente.getUfCli());
-        values.put("cidade_Cliente", modeloCliente.getCidadeCli());
+        values.put("rg_Cliente", modeloCliente.getRgCli());
+        values.put("email_Cliente", modeloCliente.getEmailCli());
         values.put("telefone_Cliente", modeloCliente.getTelefoneCli());
         values.put("celular_Cliente", modeloCliente.getCelularCli());
-        values.put("email_Cliente", modeloCliente.getEmailCli());
         values.put("dataCadastro_Cliente", modeloCliente.getDataCadastroCli());
         values.put("dataAlteracao_Cliente", modeloCliente.getDataAlteracaoCli());
-
         SQLiteDatabase db = this.getWritableDatabase();
 
         boolean incluirCliente = db.insert("tblCliente", null, values) > 0;
@@ -48,17 +43,12 @@ public class ClienteControle extends DataBaseAdapter {
     public boolean atualizarCliente (ClienteModelo modeloCliente){
 
         ContentValues values = new ContentValues();
-        values.put("cpf_Cliente", modeloCliente.getCpfCli());
         values.put("nome_Cliente", modeloCliente.getNomeCli());
-        values.put("endereco_Cliente", modeloCliente.getEnderecoCli());
-        values.put("numeroEndereco_Cliente", modeloCliente.getNumeroEnderecoCli());
-        values.put("bairro_Cliente", modeloCliente.getBairroCli());
-        values.put("uf_Cliente", modeloCliente.getUfCli());
-        values.put("cidade_Cliente", modeloCliente.getCidadeCli());
+        values.put("cpf_Cliente", modeloCliente.getCpfCli());
+        values.put("rg_Cliente", modeloCliente.getRgCli());
+        values.put("email_Cliente", modeloCliente.getEmailCli());
         values.put("telefone_Cliente", modeloCliente.getTelefoneCli());
         values.put("celular_Cliente", modeloCliente.getCelularCli());
-        values.put("email_Cliente", modeloCliente.getEmailCli());
-        values.put("dataCadastro_Cliente", modeloCliente.getDataCadastroCli());
         values.put("dataAlteracao_Cliente", modeloCliente.getDataAlteracaoCli());
 
         String where = "id_Cliente = ?";
@@ -73,59 +63,14 @@ public class ClienteControle extends DataBaseAdapter {
     }
     //Fim do código fonte atualizar cliente
 
-    public List<ClienteModelo> listarClientes(){
+    public List<ClienteModelo> listarClientes(String value){
 
-        List<ClienteModelo> ListaClientes = new ArrayList<>();//ORDER by nome ASC
-        String sql = "SELECT * FROM tblcliente ORDER by nome_Cliente ASC";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(sql,null);
-
-        if (cursor.moveToFirst()) {
-
-            do {
-
-                int id = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_Cliente")));
-                String nome = cursor.getString(cursor.getColumnIndex("nome_Cliente"));
-                String cpf = cursor.getString(cursor.getColumnIndex("cpf_Cliente"));
-                String endereco = cursor.getString(cursor.getColumnIndex("endereco_Cliente"));
-                String numeroendereco = cursor.getString(cursor.getColumnIndex("numeroEndereco_Cliente"));
-                String bairro = cursor.getString(cursor.getColumnIndex("bairro_Cliente"));
-                String uf = cursor.getString(cursor.getColumnIndex("uf_Cliente"));
-                String cidade = cursor.getString(cursor.getColumnIndex("cidade_Cliente"));
-                String telefone = cursor.getString(cursor.getColumnIndex("telefone_Cliente"));
-                String celular = cursor.getString(cursor.getColumnIndex("celular_Cliente"));
-                String email = cursor.getString(cursor.getColumnIndex("email_Cliente"));
-                String dataCadastro = cursor.getString(cursor.getColumnIndex("dataCadastro_Cliente"));
-
-                ClienteModelo modeloCliente = new ClienteModelo();
-                modeloCliente.setIdCli(id);
-                modeloCliente.setCpfCli(cpf);
-                modeloCliente.setNomeCli(nome);
-                modeloCliente.setEnderecoCli(endereco);
-                modeloCliente.setNumeroEnderecoCli(numeroendereco);
-                modeloCliente.setBairroCli(bairro);
-                modeloCliente.setUfCli(uf);
-                modeloCliente.setCidadeCli(cidade);
-                modeloCliente.setTelefoneCli(telefone);
-                modeloCliente.setCelularCli(celular);
-                modeloCliente.setEmailCli(email);
-                modeloCliente.setDataCadastroCli(dataCadastro);
-
-                ListaClientes.add(modeloCliente);
-
-            }while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-
-        return ListaClientes;
-    }
-
-    public List<ClienteModelo> listarClientesFiltrando(String nomeFiltro){
+        String stringSQL = "SELECT * FROM tblcliente ORDER by nome_Cliente ASC";
+        if(value != "")
+            stringSQL = "SELECT * FROM tblcliente where nome_Cliente LIKE " + "'"+ value +"%'";
 
         List<ClienteModelo> ListaClientes = new ArrayList<>();
-        String sql = "SELECT * FROM tblcliente where nome_Cliente LIKE " + "'"+ nomeFiltro +"%'";
+        String sql = stringSQL ;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql,null);
 
@@ -136,30 +81,21 @@ public class ClienteControle extends DataBaseAdapter {
                 int id = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_Cliente")));
                 String nome = cursor.getString(cursor.getColumnIndex("nome_Cliente"));
                 String cpf = cursor.getString(cursor.getColumnIndex("cpf_Cliente"));
-                String endereco = cursor.getString(cursor.getColumnIndex("endereco_Cliente"));
-                String numeroendereco = cursor.getString(cursor.getColumnIndex("numeroEndereco_Cliente"));
-                String bairro = cursor.getString(cursor.getColumnIndex("bairro_Cliente"));
-                String uf = cursor.getString(cursor.getColumnIndex("uf_Cliente"));
-                String cidade = cursor.getString(cursor.getColumnIndex("cidade_Cliente"));
+                String rg = cursor.getString(cursor.getColumnIndex("rg_Cliente"));
+                String email = cursor.getString(cursor.getColumnIndex("email_Cliente"));
                 String telefone = cursor.getString(cursor.getColumnIndex("telefone_Cliente"));
                 String celular = cursor.getString(cursor.getColumnIndex("celular_Cliente"));
-                String email = cursor.getString(cursor.getColumnIndex("email_Cliente"));
                 String dataCadastro = cursor.getString(cursor.getColumnIndex("dataCadastro_Cliente"));
 
                 ClienteModelo modeloCliente = new ClienteModelo();
                 modeloCliente.setIdCli(id);
-                modeloCliente.setCpfCli(cpf);
                 modeloCliente.setNomeCli(nome);
-                modeloCliente.setEnderecoCli(endereco);
-                modeloCliente.setNumeroEnderecoCli(numeroendereco);
-                modeloCliente.setBairroCli(bairro);
-                modeloCliente.setUfCli(uf);
-                modeloCliente.setCidadeCli(cidade);
+                modeloCliente.setCpfCli(cpf);
+                modeloCliente.setRgCli(rg);
+                modeloCliente.setEmailCli(email);
                 modeloCliente.setTelefoneCli(telefone);
                 modeloCliente.setCelularCli(celular);
-                modeloCliente.setEmailCli(email);
                 modeloCliente.setDataCadastroCli(dataCadastro);
-
                 ListaClientes.add(modeloCliente);
 
             }while (cursor.moveToNext());
@@ -197,28 +133,21 @@ public class ClienteControle extends DataBaseAdapter {
 
             String nome = cursor.getString(cursor.getColumnIndex("nome_Cliente"));
             String cpf = cursor.getString(cursor.getColumnIndex("cpf_Cliente"));
-            String endereco = cursor.getString(cursor.getColumnIndex("endereco_Cliente"));
-            String numero = cursor.getString(cursor.getColumnIndex("numeroEndereco_Cliente"));
-            String bairro = cursor.getString(cursor.getColumnIndex("bairro_Cliente"));
-            String uf = cursor.getString(cursor.getColumnIndex("uf_Cliente"));
-            String cidade = cursor.getString(cursor.getColumnIndex("cidade_Cliente"));
             String telefone = cursor.getString(cursor.getColumnIndex("telefone_Cliente"));
             String celular = cursor.getString(cursor.getColumnIndex("celular_Cliente"));
             String email = cursor.getString(cursor.getColumnIndex("email_Cliente"));
+            String rg = cursor.getString(cursor.getColumnIndex("rg_Cliente"));
 
             modeloCliente = new ClienteModelo();
 
             modeloCliente.setIdCli(clienteID);
             modeloCliente.setNomeCli(nome);
             modeloCliente.setCpfCli(cpf);
-            modeloCliente.setEnderecoCli(endereco);
-            modeloCliente.setNumeroEnderecoCli(numero);
-            modeloCliente.setBairroCli(bairro);
-            modeloCliente.setUfCli(uf);
-            modeloCliente.setCidadeCli(cidade);
+            modeloCliente.setRgCli(rg);
+            modeloCliente.setEmailCli(email);
             modeloCliente.setTelefoneCli(telefone);
             modeloCliente.setCelularCli(celular);
-            modeloCliente.setEmailCli(email);
+
         }
 
         return modeloCliente;
