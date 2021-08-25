@@ -134,10 +134,18 @@
                 android:id="@+id/btnCancelar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="5dp"
                 android:backgroundTint="#F60707"
                 android:text="@string/dialogCliente_BtnCancelar" />
+            <Button
+                android:id="@+id/btnEndereco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Endereço" />
         </TableRow>
+
+
 
     </LinearLayout>
 </ScrollView>

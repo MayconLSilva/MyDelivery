@@ -144,12 +144,16 @@ public class ClienteActivity extends AppCompatActivity {
 
         final Button btnCancelar = (Button) dialogView.findViewById(R.id.btnCancelar);
         final Button btnSalvar = (Button) dialogView.findViewById(R.id.btnSalvar);
+        final Button btnEndereco = (Button) dialogView.findViewById(R.id.btnEndereco);
         final EditText editTextNomeCliente = (EditText) dialogView.findViewById(R.id.txtNomeCliente);
         final EditText editTextCPFCliente = (EditText) dialogView.findViewById(R.id.txtCPF_CNPJCliente);
         final EditText editTexRGIECliente = (EditText) dialogView.findViewById(R.id.txtRG_IECliente);
         final EditText editTextEmailCliente = (EditText) dialogView.findViewById(R.id.txtEmailCliente);
         final EditText editTextTelefoneCliente = (EditText) dialogView.findViewById(R.id.txtTelefoneCliente);
         final EditText editTextCelularCliente = (EditText) dialogView.findViewById(R.id.txtCelularCliente);
+
+        if(flag == 1)
+            btnEndereco.setEnabled(false);
 
         if (flag == 2) {
 
@@ -180,6 +184,7 @@ public class ClienteActivity extends AppCompatActivity {
                 btnCancelar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        flag = 1;
                         dialog.dismiss();
 
                     }
@@ -210,7 +215,7 @@ public class ClienteActivity extends AppCompatActivity {
                                 boolean incluirCliente = new ClienteControle(getApplicationContext()).salvarCliente(modeloCliente);
                                 if (incluirCliente) {
                                     Toast.makeText(getApplicationContext(), "CLIENTE INCLUIDO", Toast.LENGTH_SHORT).show();
-                                    //listarClientes();
+
                                 } else {
                                     Toast.makeText(getApplicationContext(), "ERRO AO INCLUIR CLIENTE", Toast.LENGTH_SHORT).show();
                                 }
@@ -320,8 +325,8 @@ public class ClienteActivity extends AppCompatActivity {
     public void dialogOpcoes() {
 
         //Inicio do código ref. ao dialog com opções do clique listView diário
-        final String[] items = new String[]{"EDITAR", "DELETAR", "SMS", "LIGAR", "MAPA", "E-MAIL"};
-        final Integer[] icons = new Integer[]{R.drawable.telalistacliente_dialogopcoes_iconeditar, R.drawable.telalistacliente_dialogopcoes_icondeletar, R.drawable.telalistacliente_dialogopcoes_iconsms, R.drawable.telalistacliente_dialogopcoes_iconligar, R.drawable.telalistacliente_dialogopcoes_iconmapa, R.drawable.telalistacliente_dialogopcoes_iconemail};
+        final String[] items = new String[]{"EDITAR", "DELETAR", "SMS", "LIGAR", "MAPA", "E-MAIL","ENDEREÇO"};
+        final Integer[] icons = new Integer[]{R.drawable.telalistacliente_dialogopcoes_iconeditar, R.drawable.telalistacliente_dialogopcoes_icondeletar, R.drawable.telalistacliente_dialogopcoes_iconsms, R.drawable.telalistacliente_dialogopcoes_iconligar, R.drawable.telalistacliente_dialogopcoes_iconmapa, R.drawable.telalistacliente_dialogopcoes_iconemail,R.drawable.telalistacliente_dialogopcoes_iconendereco};
         ListAdapter adapter = new ArrayAdapterWithIcon(this, items, icons);
         new AlertDialog.Builder(ClienteActivity.this)
                 .setTitle("OPÇÕES CLIENTE")
@@ -353,6 +358,9 @@ public class ClienteActivity extends AppCompatActivity {
                         }
                         if (item == 5) {
                             //Chama o e-mail
+                            Toast.makeText(getApplicationContext(), "Função não implementada nesta versão", Toast.LENGTH_SHORT).show();
+                        }
+                        if(item == 6){
                             Toast.makeText(getApplicationContext(), "Função não implementada nesta versão", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -27,6 +27,18 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
                 " dataCadastro_Cliente TEXT," +
                 " dataAlteracao_Cliente TEXT)";
 
+        String sqlclienteEndereco = "CREATE TABLE tblClienteEndereco " +
+                "(idClienteEnd INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " idCliente INTEGER UNIQUE," +
+                " logradouroClienteEnd TEXT ," +
+                " numeroClienteEnd TEXT," +
+                " bairroClienteEnd TEXT," +
+                " cidadeClienteEnd TEXT," +
+                " cepClienteEnd TEXT,"  +
+                " principalClienteEnd BOOL,"  +
+                " dataCadastroClienteEnd TEXT," +
+                " dataAlteracaoClienteEnd TEXT)";
+
         String sqlentrega = "CREATE TABLE tblentregas " +
                 "(idEnt INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " dataLancamentoEnt TEXT," +
@@ -39,7 +51,12 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
                 " assinaturaEnt BLOB,"+
                 " idERPEnt INTEGER,"+
                 " ocorrenciaEnt TEXT," +
-                " obsEnt TEXT)";
+                " obsEnt TEXT," +
+                " logradouroAlternativoEnt TEXT," +
+                " numeroAlternativoEnt TEXT," +
+                " bairroAlternativoEnt TEXT," +
+                " cidadeAlternativoEnt TEXT," +
+                " cepAlternativoEnt TEXT)";
 
         String sqlentregaCancelada = "CREATE TABLE tblentregas_canceladas" +
                 "( id_EntregasCancelada INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -65,6 +82,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
 
         db.execSQL(sqlcliente);
         db.execSQL(sqlentrega);
+        db.execSQL(sqlclienteEndereco);
         //db.execSQL(sqlentregaItens);
         //db.execSQL(sqlproduto);
         //db.execSQL(sqlentregaCancelada);
@@ -74,6 +92,9 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String sqlcliente = "DROP TABLE IF EXISTS tblCliente";
         db.execSQL(sqlcliente);
+
+        String sqlclienteEndereco = "DROP TABLE IF EXISTS tblClienteEndereco";
+        db.execSQL(sqlclienteEndereco);
 
         String sqlentrega = "DROP TABLE IF EXISTS tblentregas";
         db.execSQL(sqlentrega);
