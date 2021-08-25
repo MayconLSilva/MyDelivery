@@ -28,15 +28,18 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
                 " dataAlteracao_Cliente TEXT)";
 
         String sqlentrega = "CREATE TABLE tblentregas " +
-                "( id_Entregas INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " cpfCliente_Entregas TEXT," +
-                " data_Entregas TEXT," +
-                " hora_Entregas TEXT," +
-                " status_Entregas TEXT," +
-                " valor_Entregas FLOAT,"+
-                " assinatura_Entregas BLOB,"+
-                " idEntregaERP_Entregas INTEGER,"+
-                " tipopagamento_Entregas TEXT)";
+                "(idEnt INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " dataLancamentoEnt TEXT," +
+                " dataSaidaEnt TEXT," +
+                " dataEntregueEnt TEXT," +
+                " idCliente INTEGER," +
+                " idTracking INTEGER," +
+                " cargaEnt INTEGER," +
+                " valorEnt FLOAT,"+
+                " assinaturaEnt BLOB,"+
+                " idERPEnt INTEGER,"+
+                " ocorrenciaEnt TEXT," +
+                " obsEnt TEXT)";
 
         String sqlentregaCancelada = "CREATE TABLE tblentregas_canceladas" +
                 "( id_EntregasCancelada INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -62,9 +65,9 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
 
         db.execSQL(sqlcliente);
         db.execSQL(sqlentrega);
-        db.execSQL(sqlentregaItens);
-        db.execSQL(sqlproduto);
-        db.execSQL(sqlentregaCancelada);
+        //db.execSQL(sqlentregaItens);
+        //db.execSQL(sqlproduto);
+        //db.execSQL(sqlentregaCancelada);
     }
 
     @Override
@@ -75,11 +78,11 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
         String sqlentrega = "DROP TABLE IF EXISTS tblentregas";
         db.execSQL(sqlentrega);
 
-        String sqlentregaItens = "DROP TABLE IF EXISTS tblentregasitens";
-        db.execSQL(sqlentregaItens);
-
-        String sqlentregaCancelada = "DROP TABLE IF EXISTS tblentregas_canceladas";
-        db.execSQL(sqlentregaCancelada);
+//        String sqlentregaItens = "DROP TABLE IF EXISTS tblentregasitens";
+//        db.execSQL(sqlentregaItens);
+//
+//        String sqlentregaCancelada = "DROP TABLE IF EXISTS tblentregas_canceladas";
+//        db.execSQL(sqlentregaCancelada);
 
         onCreate(db);
     }
