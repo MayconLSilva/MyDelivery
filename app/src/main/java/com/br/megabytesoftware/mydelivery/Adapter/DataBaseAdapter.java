@@ -29,7 +29,7 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
 
         String sqlclienteEndereco = "CREATE TABLE tblClienteEndereco " +
                 "(idClienteEnd INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " idCliente INTEGER UNIQUE," +
+                " idCliente INTEGER ," +
                 " logradouroClienteEnd TEXT ," +
                 " numeroClienteEnd TEXT," +
                 " bairroClienteEnd TEXT," +

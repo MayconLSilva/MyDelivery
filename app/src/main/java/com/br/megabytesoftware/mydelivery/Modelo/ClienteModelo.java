@@ -2,18 +2,25 @@ package com.br.megabytesoftware.mydelivery.Modelo;
 
 public class ClienteModelo {
 
+    //Cadastro Principal
     private int IdCli;
     private String nomeCli;
     private String cpfCli;
     private String rgCli;
+    private String telefoneCli;
+    private String celularCli;
+    private String emailCli;
+
+    //Cadastro de Endereço
+    private int idenderecoCli;
     private String enderecoCli;
     private String numeroEnderecoCli;
     private String bairroCli;
     private String ufCli;
     private String cidadeCli;
-    private String telefoneCli;
-    private String celularCli;
-    private String emailCli;
+    private String cepCli;
+    private Boolean enderecoPrincipalCli;
+
     private String dataCadastroCli;
     private String dataAlteracaoCli;
 
@@ -129,5 +136,29 @@ public class ClienteModelo {
 
     public void setRgCli(String rgCli) {
         this.rgCli = rgCli;
+    }
+
+    public String getCepCli() {
+        return cepCli;
+    }
+
+    public void setCepCli(String cepCli) {
+        this.cepCli = cepCli;
+    }
+
+    public Boolean getEnderecoPrincipalCli() {
+        return enderecoPrincipalCli;
+    }
+
+    public void setEnderecoPrincipalCli(Boolean enderecoPrincipalCli) {
+        this.enderecoPrincipalCli = enderecoPrincipalCli;
+    }
+
+    public int getIdenderecoCli() {
+        return idenderecoCli;
+    }
+
+    public void setIdenderecoCli(int idenderecoCli) {
+        this.idenderecoCli = idenderecoCli;
     }
 }

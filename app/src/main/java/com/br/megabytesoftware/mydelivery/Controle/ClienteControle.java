@@ -12,7 +12,6 @@ import java.util.List;
 
 public class ClienteControle extends DataBaseAdapter {
 
-    private int resultadoInsertUpdate;
     public ClienteControle(Context context){
         super(context);
         //Integração com o banco de dados
@@ -29,7 +28,6 @@ public class ClienteControle extends DataBaseAdapter {
         values.put("telefone_Cliente", modeloCliente.getTelefoneCli());
         values.put("celular_Cliente", modeloCliente.getCelularCli());
         values.put("dataCadastro_Cliente", modeloCliente.getDataCadastroCli());
-        values.put("dataAlteracao_Cliente", modeloCliente.getDataAlteracaoCli());
         SQLiteDatabase db = this.getWritableDatabase();
 
         boolean incluirCliente = db.insert("tblCliente", null, values) > 0;
@@ -50,7 +48,6 @@ public class ClienteControle extends DataBaseAdapter {
         values.put("telefone_Cliente", modeloCliente.getTelefoneCli());
         values.put("celular_Cliente", modeloCliente.getCelularCli());
         values.put("dataAlteracao_Cliente", modeloCliente.getDataAlteracaoCli());
-
         String where = "id_Cliente = ?";
 
         String[] whereArgs = {Integer.toString(modeloCliente.getIdCli())};
@@ -153,4 +150,69 @@ public class ClienteControle extends DataBaseAdapter {
         return modeloCliente;
     }
     //Fim do código fonte busca informações do cliente pela id
+
+    //Inicio do código fonte salvar endereço do cliente
+    public boolean salvarClienteEndereco (ClienteModelo modeloCliente){
+
+        ContentValues values = new ContentValues();
+        values.put("idCliente",modeloCliente.getIdCli());
+        values.put("logradouroClienteEnd", modeloCliente.getEnderecoCli());
+        values.put("numeroClienteEnd", modeloCliente.getNumeroEnderecoCli());
+        values.put("bairroClienteEnd", modeloCliente.getBairroCli());
+        values.put("cidadeClienteEnd", modeloCliente.getCidadeCli());
+        values.put("cepClienteEnd", modeloCliente.getCepCli());
+        values.put("principalClienteEnd", modeloCliente.getEnderecoPrincipalCli());
+        values.put("dataCadastroClienteEnd", modeloCliente.getDataCadastroCli());
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        boolean incluirClienteEndereco = db.insert("tblClienteEndereco", null, values) > 0;
+        db.close();
+
+        return incluirClienteEndereco;
+    }
+    //Fim do código fonte salvar endereço do cliente
+
+    //Inicio do código fonte busca informações do cliente pela id
+    public ClienteModelo buscaEndereco(int clienteID,String filtroPrincipal){
+
+        String filtroConsulta = "";
+        if(filtroPrincipal == "S")
+            filtroConsulta = " and principalClienteEnd = 1";
+
+        ClienteModelo modeloCliente = new ClienteModelo();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "select * from tblClienteEndereco where idCliente = "+clienteID + filtroConsulta;
+
+        Cursor cursor = db.rawQuery(sql,null);
+
+        if (cursor.moveToFirst()){
+
+            String logradouro = cursor.getString(cursor.getColumnIndex("logradouroClienteEnd"));
+            String numerologradouro = cursor.getString(cursor.getColumnIndex("numeroClienteEnd"));
+            String bairro = cursor.getString(cursor.getColumnIndex("bairroClienteEnd"));
+            String cidade = cursor.getString(cursor.getColumnIndex("cidadeClienteEnd"));
+            String cep = cursor.getString(cursor.getColumnIndex("cepClienteEnd"));
+            Boolean principal = Boolean.valueOf(cursor.getString(cursor.getColumnIndex("principalClienteEnd")));
+            int idEndereco = cursor.getInt(cursor.getColumnIndex("idClienteEnd"));
+
+            modeloCliente = new ClienteModelo();
+            modeloCliente.setIdenderecoCli(idEndereco);
+            modeloCliente.setIdCli(clienteID);
+            modeloCliente.setEnderecoCli(logradouro);
+            modeloCliente.setNumeroEnderecoCli(numerologradouro);
+            modeloCliente.setBairroCli(bairro);
+            modeloCliente.setCepCli(cep);
+            modeloCliente.setCidadeCli(cidade);
+            modeloCliente.setEnderecoPrincipalCli(principal);
+
+            System.out.println("Principal " + principal);
+
+        }
+
+        return modeloCliente;
+    }
+    //Fim do código fonte busca informações do cliente pela id
+
+
+
 }

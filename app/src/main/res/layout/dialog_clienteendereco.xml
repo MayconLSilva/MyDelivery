@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+
+    android:padding="5dp">
+
+    <LinearLayout
+        android:id="@+id/settings_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Switch
+            android:id="@+id/switchEnderecoPrincipal"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/dialogCliente_Principal"
+            android:textOff="NÃO"
+            android:textOn="SIM" />
+
+
+        <!-- CIDADE CLIENTE -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+            <EditText
+                android:id="@+id/txtCidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/dialogCliente_Cidade" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- CEP CLIENTE -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+            <EditText
+                android:id="@+id/txtCEP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="@string/dialogCliente_CEP"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- ENDERECO CLIENTE -->
+       <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+           <EditText
+               android:id="@+id/txtEndereco"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/dialogCliente_Endereco"
+               android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- NÚMERO ENDERECO -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+            <EditText
+                android:id="@+id/txtNumeroEndereco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dialogCliente_NumeroEndereco"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- BAIRRO CLIENTE -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="#E1DFDF"
+            app:boxStrokeColor="#919191">
+
+            <EditText
+                android:id="@+id/txtBairro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dialogCliente_Bairro"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <Button
+                android:id="@+id/btnSalvar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#4CAF50"
+                android:layout_marginLeft="5dp"
+                android:text="@string/dialogCliente_BtnSalvar" />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:backgroundTint="#F60707"
+                android:text="@string/dialogCliente_BtnCancelar" />
+        </TableRow>
+        <Button
+            android:id="@+id/btnEndereco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/dialogCliente_BtnCEP" />
+
+    </LinearLayout>
+</ScrollView>

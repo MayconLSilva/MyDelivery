@@ -15,16 +15,20 @@
     <string name="telaListaCliente_SearchClientes">Busca clientes</string>
     <string name="telaDashboard_Entrega">Entregas</string>
     <string name="telaDashboard_Venda">Vendas</string>
+
+    <!-- DIALOG NOVO CLIENTE -->
     <string name="dialogCliente_nomecliente">Nome</string>
     <string name="dialogCliente_cpfcliente">CPF/CNPJ</string>
     <string name="dialogCliente_rgIEcliente">RG/I.E</string>
-    <string name="dialogCliente_Endereco">Endereço</string>
-    <string name="dialogCliente_NumeroEndereco">Nº</string>
-    <string name="dialogCliente_Bairro">Bairro</string>
-    <string name="dialogCliente_Cidade">Cidade</string>
     <string name="dialogCliente_Email">E-mail</string>
     <string name="dialogCliente_Telefone">Telefone</string>
     <string name="dialogCliente_Celular">Celular</string>
+    <string name="dialogCliente_Cidade">Cidade</string>
+    <string name="dialogCliente_Principal">Principal</string>
+    <string name="dialogCliente_CEP">CEP</string>
+    <string name="dialogCliente_Endereco">Endereço</string>
+    <string name="dialogCliente_NumeroEndereco">Nº</string>
+    <string name="dialogCliente_Bairro">Bairro</string>
     <string name="dialogCliente_BtnSalvar">Salvar</string>
     <string name="dialogCliente_BtnCancelar">Cancelar</string>
     <string name="dialogCliente_BtnCEP">BUSCAR CEP</string>

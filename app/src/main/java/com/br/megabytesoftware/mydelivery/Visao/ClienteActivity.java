@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.SearchView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -245,6 +246,14 @@ public class ClienteActivity extends AppCompatActivity {
                     }
                 });
                 //Fim do evento do click salvar cliente
+
+                //Chama o dialog para cadastrar endereço
+                btnEndereco.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogEnderecoCliente(Integer.parseInt(idClienteClicada));
+                    }
+                });
             }
         });
         mAlertDialog.show();
@@ -361,7 +370,7 @@ public class ClienteActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Função não implementada nesta versão", Toast.LENGTH_SHORT).show();
                         }
                         if(item == 6){
-                            Toast.makeText(getApplicationContext(), "Função não implementada nesta versão", Toast.LENGTH_SHORT).show();
+                            dialogEnderecoCliente(Integer.parseInt(idClienteClicada));
                         }
                     }
                 }).show();
@@ -384,6 +393,114 @@ public class ClienteActivity extends AppCompatActivity {
     }
     //Fim código fonte deleta cliente
 
+    //Inicio código fonte para cadastrar ou alterar um endereço
+    public void dialogEnderecoCliente(int idCliente){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(ClienteActivity.this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_clienteendereco, null);
+
+        //Inicio da mascara CEP
+        EditText cepCliente = (EditText) dialogView.findViewById(R.id.txtCEP);
+        MaskEditTextChangedListener mascaraCEP = new MaskEditTextChangedListener("##.###-###", cepCliente);
+        cepCliente.addTextChangedListener(mascaraCEP);
+        //Fim da mascara CEP
+
+        final Button btnCancelar = (Button) dialogView.findViewById(R.id.btnCancelar);
+        final Button btnSalvar = (Button) dialogView.findViewById(R.id.btnSalvar);
+        final Button btnEndereco = (Button) dialogView.findViewById(R.id.btnEndereco);
+
+        final EditText editTextCidade = (EditText) dialogView.findViewById(R.id.txtCidade);
+        final EditText editTextCEP = (EditText) dialogView.findViewById(R.id.txtCEP);
+        final EditText editTextEndereco = (EditText) dialogView.findViewById(R.id.txtEndereco);
+        final EditText editTextNumeroEndereco = (EditText) dialogView.findViewById(R.id.txtNumeroEndereco);
+        final EditText editTextBairro = (EditText) dialogView.findViewById(R.id.txtBairro);
+        final Switch switchEnderecoPrincipal = (Switch) dialogView.findViewById(R.id.switchEnderecoPrincipal);
+
+        //Busco informações do endereço
+        final ClienteControle clienteController = new ClienteControle(getApplicationContext());
+        final ClienteModelo modeloCliente = clienteController.buscaEndereco(Integer.parseInt(idClienteClicada),"S");
+        Boolean existePrincipal = modeloCliente.getEnderecoPrincipalCli();
+
+        if(existePrincipal == null){
+            switchEnderecoPrincipal.setChecked(true);
+        }else{
+            switchEnderecoPrincipal.setChecked(false);
+            switchEnderecoPrincipal.setEnabled(false);
+        }
+
+
+        dialogBuilder.setTitle("NOVO ENDEREÇO");
+        if(flag != 1)
+            dialogBuilder.setTitle("EDITAR ENDEREÇO");
+
+        dialogBuilder.setIcon(R.drawable.telalistacliente_dialogopcoes_iconendereco);
+        dialogBuilder.setCancelable(false);
+        dialogBuilder.setView(dialogView);
+
+        final AlertDialog mAlertDialog = dialogBuilder.create();
+        mAlertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                //Eventos do botões
+
+                //Botão cancelar
+                btnCancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                //Botão salvar
+                btnSalvar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        ClienteModelo clienteModelo = new ClienteModelo();
+                        if(switchEnderecoPrincipal.isChecked()){
+                            clienteModelo.setEnderecoPrincipalCli(true);
+                        }else{
+                            clienteModelo.setEnderecoPrincipalCli(false);
+                        }
+                        clienteModelo.setEnderecoCli(editTextEndereco.getText().toString());
+                        clienteModelo.setNumeroEnderecoCli(editTextNumeroEndereco.getText().toString());
+                        clienteModelo.setBairroCli(editTextBairro.getText().toString());
+                        clienteModelo.setCepCli(editTextCEP.getText().toString());
+                        clienteModelo.setCidadeCli(editTextCidade.getText().toString());
+                        clienteModelo.setIdCli(idCliente);
+                        clienteModelo.setDataCadastroCli(dataAtual);
+
+                        boolean incluirClienteEndereco = new ClienteControle(getApplicationContext()).salvarClienteEndereco(clienteModelo);
+                        if (incluirClienteEndereco) {
+                            Toast.makeText(getApplicationContext(), "ENDEREÇO CLIENTE INCLUIDO", Toast.LENGTH_SHORT).show();
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "ERRO AO INCLUIR ENDEREÇO DO CLIENTE", Toast.LENGTH_SHORT).show();
+                        }
+
+                        System.out.println("chamou  " + incluirClienteEndereco);
+                        dialog.dismiss();
+                    }
+                });
+
+                //Botão busca endereço pelo CEP
+                btnEndereco.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(editTextCEP.getText().toString() == "")
+                            Toast.makeText(getApplicationContext(), "É necessário informar um CEP", Toast.LENGTH_SHORT).show();
+                            return;
+                    }
+                });
+
+
+
+            }
+        });
+        mAlertDialog.show();
+
+
+    }
 
 
 
