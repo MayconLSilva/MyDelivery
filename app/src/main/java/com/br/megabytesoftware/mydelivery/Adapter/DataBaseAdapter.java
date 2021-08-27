@@ -80,12 +80,35 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
                 " descricao_Produto TEXT," +
                 " valor_Produto FLOAT)";
 
+        String viewEntregas = "CREATE VIEW v_entregas \n" +
+                "AS\n" +
+                "select idEnt,\n" +
+                "       dataLancamentoEnt,\n" +
+                "\t   idTracking,\n" +
+                "\t   valorEnt,\n" +
+                "\t   obsEnt,\n" +
+                "\t   nome_Cliente,\n" +
+                "\t   case when logradouroAlternativoEnt is null OR logradouroAlternativoEnt = '' then (select logradouroClienteEnd from tblClienteEndereco where idClienteEnd = tblentregas.idCliente and principalClienteEnd = 1) \n" +
+                "\t   else logradouroAlternativoEnt end as enderecoEntrega,\n" +
+                "\t   case when numeroAlternativoEnt is null OR numeroAlternativoEnt = '' then (select numeroClienteEnd from tblClienteEndereco where idClienteEnd = tblentregas.idCliente and principalClienteEnd = 1) \n" +
+                "\t   else numeroAlternativoEnt end as NumeroenderecoEntrega,\n" +
+                "\t   case when bairroAlternativoEnt is null  OR bairroAlternativoEnt = '' then (select bairroClienteEnd from tblClienteEndereco where idClienteEnd = tblentregas.idCliente and principalClienteEnd = 1) \n" +
+                "\t   else bairroAlternativoEnt end as BairroenderecoEntrega,\n" +
+                "\t   case when cidadeAlternativoEnt is null OR cidadeAlternativoEnt = '' then (select cidadeClienteEnd from tblClienteEndereco where idClienteEnd = tblentregas.idCliente and principalClienteEnd = 1) \n" +
+                "\t   else cidadeAlternativoEnt end as CidadeenderecoEntrega,\n" +
+                "\t   case when cepAlternativoEnt is null OR cepAlternativoEnt = '' then (select cepClienteEnd from tblClienteEndereco where idClienteEnd = tblentregas.idCliente and principalClienteEnd = 1) \n" +
+                "\t   else cepAlternativoEnt end as CEPenderecoEntrega\n" +
+                "\t from tblentregas\n" +
+                "\t left join tblCliente on tblCliente.id_Cliente = tblentregas.idCliente";
+
         db.execSQL(sqlcliente);
         db.execSQL(sqlentrega);
         db.execSQL(sqlclienteEndereco);
         //db.execSQL(sqlentregaItens);
         //db.execSQL(sqlproduto);
         //db.execSQL(sqlentregaCancelada);
+
+        db.execSQL(viewEntregas);
     }
 
     @Override
@@ -98,6 +121,10 @@ public class DataBaseAdapter extends SQLiteOpenHelper {
 
         String sqlentrega = "DROP TABLE IF EXISTS tblentregas";
         db.execSQL(sqlentrega);
+
+        //SCRIPT VIEWS
+        String viewEntregas = "DROP TABLE IF EXISTS v_entregas";
+        db.execSQL(viewEntregas);
 
 //        String sqlentregaItens = "DROP TABLE IF EXISTS tblentregasitens";
 //        db.execSQL(sqlentregaItens);

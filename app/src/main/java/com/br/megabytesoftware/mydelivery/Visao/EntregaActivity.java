@@ -65,7 +65,11 @@ public class EntregaActivity extends AppCompatActivity {
 
                 arrayListServicos.add("ID " + obj.getIdEntrega() + " - " + "Data lanc: " + obj.getDataLancamentoEntrega() + "\n" +
                                       "Nome: " + obj.getNomeCliente() + " - " + "R$: " +  obj.getValorEntrega() + "\n" +
+                                      "Endereço: " + obj.getEnderecoCliente() + ", Nº " + obj.getNumeroEnderecoCliente() + "\n"+
+                                      "Bairro: " + obj.getBairroCliente() + "\n" +
+                                      "Cidade: " + obj.getCidadeCliente() + "CEP: " + obj.getCepCliente() + "\n" +
                                       "Obs.: " + obj.getObsEntrega());
+
             }
         }
 

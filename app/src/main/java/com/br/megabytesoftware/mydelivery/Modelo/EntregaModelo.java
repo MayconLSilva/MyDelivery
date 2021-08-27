@@ -17,6 +17,13 @@ public class EntregaModelo {
 
     //MÉTODOS PARA CONSULTA
     private String nomeCliente;
+    private String enderecoCliente;
+    private String numeroEnderecoCliente;
+    private String bairroCliente;
+    private String cepCliente;
+    private String cidadeCliente;
+
+
 
     public int getIdEntrega() {
         return idEntrega;
@@ -129,5 +136,45 @@ public class EntregaModelo {
 
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
+    }
+
+    public String getEnderecoCliente() {
+        return enderecoCliente;
+    }
+
+    public void setEnderecoCliente(String enderecoCliente) {
+        this.enderecoCliente = enderecoCliente;
+    }
+
+    public String getNumeroEnderecoCliente() {
+        return numeroEnderecoCliente;
+    }
+
+    public void setNumeroEnderecoCliente(String numeroEnderecoCliente) {
+        this.numeroEnderecoCliente = numeroEnderecoCliente;
+    }
+
+    public String getBairroCliente() {
+        return bairroCliente;
+    }
+
+    public void setBairroCliente(String bairroCliente) {
+        this.bairroCliente = bairroCliente;
+    }
+
+    public String getCepCliente() {
+        return cepCliente;
+    }
+
+    public void setCepCliente(String cepCliente) {
+        this.cepCliente = cepCliente;
+    }
+
+    public String getCidadeCliente() {
+        return cidadeCliente;
+    }
+
+    public void setCidadeCliente(String cidadeCliente) {
+        this.cidadeCliente = cidadeCliente;
     }
 }
