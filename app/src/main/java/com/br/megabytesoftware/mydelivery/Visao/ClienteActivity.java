@@ -1,20 +1,19 @@
 package com.br.megabytesoftware.mydelivery.Visao;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -22,19 +21,28 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.br.megabytesoftware.mydelivery.Adapter.ArrayAdapterWithIcon;
 import com.br.megabytesoftware.mydelivery.Controle.ClienteControle;
 import com.br.megabytesoftware.mydelivery.Modelo.ClienteModelo;
 import com.br.megabytesoftware.mydelivery.R;
+import com.br.megabytesoftware.mydelivery.Service.ICep;
+import com.br.megabytesoftware.mydelivery.Service.ModelEnderecoService;
 import com.br.megabytesoftware.mydelivery.Util.MaskEditTextChangedListener;
 import com.br.megabytesoftware.mydelivery.Util.Utils;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class ClienteActivity extends AppCompatActivity {
 
@@ -46,6 +54,11 @@ public class ClienteActivity extends AppCompatActivity {
     private String idClienteClicada;
     private String celularClicado;
     private String enderecoClicado;
+
+    //Declarações ref. consulta endereço pelo CEP
+    private Retrofit retrofitCEP;
+    private ProgressBar progressBarCEP;
+    private final String URL = "https://viacep.com.br/ws/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +74,9 @@ public class ClienteActivity extends AppCompatActivity {
         //Inicio do código chama o listar clientes
         listarClientes("");
         //Fim do código chama o listar clientes
+
+        //Inicio do código consulta endereço pelo CEP
+
     }
 
     @Override
@@ -477,8 +493,6 @@ public class ClienteActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(getApplicationContext(), "ERRO AO INCLUIR ENDEREÇO DO CLIENTE", Toast.LENGTH_SHORT).show();
                         }
-
-                        System.out.println("chamou  " + incluirClienteEndereco);
                         dialog.dismiss();
                     }
                 });
@@ -487,9 +501,50 @@ public class ClienteActivity extends AppCompatActivity {
                 btnEndereco.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(editTextCEP.getText().toString() == "")
-                            Toast.makeText(getApplicationContext(), "É necessário informar um CEP", Toast.LENGTH_SHORT).show();
+
+                        boolean resultado = validarCampos(editTextCEP.getText().toString().trim());
+                        if(resultado == false)
+                        {
+                            Toast.makeText(dialogView.getContext(), "Informe um CEP válido: ", Toast.LENGTH_LONG).show();
                             return;
+                        }
+
+                        //Capturo o CEP
+                        String sCep = editTextCEP.getText().toString().trim();
+
+                        //Removendo o ponto e o traço do padrão CEP
+                        sCep = sCep.replaceAll("[.-]+", "");
+
+                        //Busco endereço via CEP
+                        retrofitCEP = new Retrofit.Builder()
+                                .baseUrl(URL)                                       //endereço do webservice
+                                .addConverterFactory(GsonConverterFactory.create()) //conversor
+                                .build();
+
+                        ICep restService = retrofitCEP.create(ICep.class);
+                        Call<ModelEnderecoService> call = restService.consultarCEP(sCep);
+
+                        call.enqueue(new Callback<ModelEnderecoService>() {
+                            @Override
+                            public void onResponse(Call<ModelEnderecoService> call, Response<ModelEnderecoService> response) {
+                                if (response.isSuccessful())
+                                {
+                                    ModelEnderecoService objCep = response.body();
+
+                                    editTextCidade.setText(objCep.getLocalidade());
+                                    editTextBairro.setText(objCep.getBairro());
+                                    editTextEndereco.setText(objCep.getLogradouro());
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<ModelEnderecoService> call, Throwable t) {
+                                Toast.makeText(getApplicationContext(), "Ocorreu um erro ao tentar consultar o CEP. Erro: " + t.getMessage(), Toast.LENGTH_LONG).show();
+
+                            }
+                        });
+
                     }
                 });
 
@@ -500,6 +555,23 @@ public class ClienteActivity extends AppCompatActivity {
         mAlertDialog.show();
 
 
+    }
+
+    private Boolean validarCampos(String value) {
+
+        Boolean status = true;
+        String cep = value.toString().trim();
+
+        if (cep.isEmpty()) {
+            //txtCEP.setError("Digite um CEP válido.");
+            status = false;
+        }
+
+        if ((cep.length() > 1) && (cep.length() < 10)) {
+            //txtCEP.setError("O CEP deve possuir 8 dígitos");
+            status = false;
+        }
+        return status;
     }
 
 

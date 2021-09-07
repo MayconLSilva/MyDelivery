@@ -60,8 +60,6 @@ public abstract class Utils {
             //startActivity(intentSMS);
         }
     }
-
-
     //Fim código fonte chama o envio de SMS do próprio celular com o número do cliente que pegou
 
     //Inicio do código fonte chama o maps
@@ -134,6 +132,22 @@ public abstract class Utils {
     }
     //Fim do código fonte remove acentuação
 
+    public Boolean validarCampos(String value) {
+
+        Boolean status = true;
+        String cep = value.toString().trim();
+
+        if (cep.isEmpty()) {
+            //txtCEP.setError("Digite um CEP válido.");
+            status = false;
+        }
+
+        if ((cep.length() > 1) && (cep.length() < 10)) {
+            //txtCEP.setError("O CEP deve possuir 8 dígitos");
+            status = false;
+        }
+        return status;
+    }
 
 
 }
